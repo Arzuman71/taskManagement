@@ -2,6 +2,8 @@
 <%@ page import="model.Comment" %>
 <%@ page import="java.util.List" %>
 <%@ page import="myUtil.DateUtil" %>
+<%@ page import="model.User" %>
+<%@ page import="model.UserType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,11 +12,18 @@
 
 </head>
 <body class="body_2">
+
 <%
+    User user = (User) session.getAttribute("user");
+
     ToDo toDo = (ToDo) request.getAttribute("ToDoById");
     List<Comment> comments = (List<Comment>) request.getAttribute("commentsByToDoId");
+    if (user.getUserType() == UserType.MANAGER) {
 %>
-
+<a href="/manager">HOME</a>
+<%} else {%>
+<a href="/user">HOME</a>
+<%}%>
 <div class="control2">
 
     <div class="for_comment_photo"><% if (toDo.getPictureUrl() != null) { %>
@@ -44,6 +53,8 @@
         <%=DateUtil.convertDateToString(comment.getCreatedDate())%>
         <p style=" text-align: justify"><%=comment.getCommentText()%>
         </p>
+        <%
+            if (user.equals(comment.getUser())) {%>
         <form action="/removeComment" method="get">
             <input type="hidden" name="commentId" value="<%=comment.getId()%>">
             <input type="hidden" name="toDoId" value="<%=toDo.getId()%>">
@@ -51,6 +62,7 @@
         </form>
 
         <%
+                    }
                 }
             }
         %>

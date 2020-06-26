@@ -204,16 +204,19 @@ ul li {
 
 .right_todo {
     margin-left: 50px;
+    width: 50%;
+
 }
 
 .left_todo2 {
     margin-left: 750px;
-    margin-top: -320px;
+    margin-top: -370px;
 }
 
 .right_todo2 {
     margin-left: 50px;
     height: 300px;
+    width: 50%;
 }
 
 .delete {
@@ -257,14 +260,17 @@ ul li {
     left: 0;
     right: 0;
 }
-.for_comment_photo{
+
+.for_comment_photo {
     margin-left: 305px;
 }
-.for_h2{
+
+.for_h2 {
     margin-left: 130px;
     margin-top: -90px;
 }
-.comment_block{
+
+.comment_block {
     font-size: 20px;
     margin-top: 50px;
 }

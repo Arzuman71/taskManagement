@@ -21,7 +21,7 @@ public class UserAuthFilter implements Filter {
         User user = (User) session.getAttribute("user");
         if (user == null || user.getUserType() != UserType.USER) {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
-            response.sendRedirect("/index.jsp");
+            response.sendRedirect("/");
         }else {
             filterChain.doFilter(servletRequest, servletResponse);
 

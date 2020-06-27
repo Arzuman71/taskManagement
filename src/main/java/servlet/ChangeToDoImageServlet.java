@@ -17,7 +17,7 @@ import java.io.IOException;
         maxFileSize = 1024 * 1024 * 5,
         maxRequestSize = 1024 * 1024 * 5 * 5)
 
-public class ChangeTaskImageServlet extends HttpServlet {
+public class ChangeToDoImageServlet extends HttpServlet {
 
     private final String UPLOAD_DIR = "C:\\Users\\Arzuman\\Desktop\\Folder\\web\\TaskManagement\\upload";
     ToDoManager toDoManager = new ToDoManager();

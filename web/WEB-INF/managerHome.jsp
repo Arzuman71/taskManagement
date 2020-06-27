@@ -62,7 +62,7 @@
             <input class="input_for_admin" name="name" type="text " placeholder="NAME"/><br>
             <input class="input_for_admin" name="surname" type="text" placeholder="SURNAME"/><br>
             <input class="input_for_admin" name="email" type="text" placeholder="EMAIL"/><br>
-            <input class="input_for_admin" name="password" type="text" placeholder="PASSWORD"/><br>
+            <input class="input_for_admin" name="password" type="text" placeholder="PASSWORD"/><br><br>
             <input name="image" type="file"/><br>
             <input type="submit" value="create"/>
         </form>
@@ -74,7 +74,7 @@
             <input class="input_for_admin" name="description" type="text" placeholder="DESCRIPTION"/><br>
             <input class="input_for_admin" name="deadline" type="date"/><br>
             <input class="input_for_admin" name="status" type="text" placeholder="STATUE"/><br>
-            <input class="input_for_admin" name="userId" type="text" placeholder="USER ID"/><br>
+            <input class="input_for_admin" name="userId" type="text" placeholder="USER ID"/><br><br>
             <input name="pictureUrl" type="file"/><br>
             <input type="submit" value="create"/>
         </form>
@@ -100,6 +100,8 @@
                         <input name="pictureUrl" type="file"/><br>
                         <input type="submit" value="change photo"/>
                     </form>
+                    <a class="delete" href="/removeToDo?todoId=<%= toDo.getId() %>">delete</a>
+
                 </div>
         </div>
         </li>
@@ -120,7 +122,7 @@
     </a>
         <div class="changeTaskImage_block">
             <li><% if (toDo.getPictureUrl() != null) { %>
-                <img class="todo_photo" src="/image?path=<%=toDo.getPictureUrl()%>"/> <%}else {%>
+                <img class="todo_photo" src="/image?path=<%=toDo.getPictureUrl()%>"/> <%} else {%>
                 <img class="todo_photo" src="/image/na.jpg"/>
                     <%}%>
 
@@ -130,6 +132,8 @@
                         <input name="pictureUrl" type="file"/><br>
                         <input type="submit" value="change photo"/>
                     </form>
+                    <a class="delete" href="/removeToDo?todoId=<%= toDo.getId() %>">delete</a>
+
                 </div>
         </div>
         </li>

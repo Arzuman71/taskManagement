@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/manager", "/register", "/task"})
+@WebFilter(urlPatterns = {"/manager", "/register", "/task", "/removeUser", "/removeToDo", "/removeToDo"})
 public class ManagerAuthFilter implements Filter {
 
     @Override
@@ -18,12 +18,8 @@ public class ManagerAuthFilter implements Filter {
         User user = (User) session.getAttribute("user");
         if (user == null || user.getUserType() != UserType.MANAGER) {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
-            response.sendRedirect("/index.jsp");
-        }else {
-            filterChain.doFilter(servletRequest, servletResponse);
-
+            response.sendRedirect("/");
         }
+        filterChain.doFilter(servletRequest, servletResponse);
     }
-
-
 }

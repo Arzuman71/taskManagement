@@ -54,7 +54,7 @@
         <p style=" text-align: justify"><%=comment.getCommentText()%>
         </p>
         <%
-            if (user.equals(comment.getUser())) {%>
+            if (user.getUserType()==UserType.MANAGER || user.equals(comment.getUser())) {%>
         <form action="/removeComment" method="get">
             <input type="hidden" name="commentId" value="<%=comment.getId()%>">
             <input type="hidden" name="toDoId" value="<%=toDo.getId()%>">

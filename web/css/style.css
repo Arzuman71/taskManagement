@@ -2,7 +2,7 @@
     background-image: url("/image/black.jpg");
     border-style: solid;
     color: #fffffd;
-
+    font-family: 'Open Sans', 'sans-serif', 'FontAwesome';
 }
 
 .body_2 {
@@ -10,13 +10,8 @@
     background-attachment: fixed;
     background-repeat: repeat-x;
     color: #fffffd;
+
 }
-
-
-* {
-    font-family: 'Open Sans', 'sans-serif', 'FontAwesome';
-}
-
 
 h1 {
     color: rgb(255, 255, 255);
@@ -229,13 +224,18 @@ ul li {
 }
 
 .register {
-    margin-top: -370px;
-    margin-left: 400px;
+    width: 400px;
+    margin-top: -30px;
+    margin-left: 550px;
+    position: absolute;
 }
 
 .add_todo {
-    margin-top: -445px;
-    margin-left: 800px;
+    margin-top: 170px;
+    margin-left: 1000px;
+    position: absolute;
+    width: 400px;
+
 }
 
 .input_for_admin {
@@ -273,4 +273,9 @@ ul li {
 .comment_block {
     font-size: 20px;
     margin-top: 50px;
+}
+
+.all_users {
+    position: absolute;
+    width: 400px;
 }

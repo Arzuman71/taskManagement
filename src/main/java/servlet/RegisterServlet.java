@@ -55,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
                     .password(password)
                     .build();
             for (Part part : req.getParts()) {
-                if (getFileName(part) != null) {
+                if ((getFileName(part) != null) && !(getFileName(part).equals(""))) {
                     String fileName = System.currentTimeMillis() + getFileName(part);
                     String fullFileName = UPLOAD_DIR + File.separator + fileName;
                     part.write(fullFileName);
@@ -66,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
             msg.append("<span style=\"color:green\">User register Successfully, Please login</span>");
         }
         req.getSession().setAttribute("msg", msg.toString());
-        resp.sendRedirect("/");
+        req.getRequestDispatcher("/manager").forward(req, resp);
     }
 
     private String getFileName(Part part) {

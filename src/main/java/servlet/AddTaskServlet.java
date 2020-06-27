@@ -23,7 +23,6 @@ import java.util.Date;
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class AddTaskServlet extends HttpServlet {
 
-    ToDo toDo = new ToDo();
     UserManager userManager = new UserManager();
     private final String UPLOAD_DIR = "C:\\Users\\Arzuman\\Desktop\\Folder\\web\\TaskManagement\\upload";
 
@@ -34,9 +33,8 @@ public class AddTaskServlet extends HttpServlet {
         String description = req.getParameter("description");
         String status = req.getParameter("status");
         long userId = Long.parseLong(req.getParameter("userId"));
-        Date deadline = null;
-        deadline = DateUtil.convertStringToDate(req.getParameter("deadline"));
-        toDo = ToDo.builder()
+        Date deadline = DateUtil.convertStringToDate(req.getParameter("deadline"));
+        ToDo toDo = ToDo.builder()
                 .name(name)
                 .description(description)
                 .deadline(deadline)
@@ -44,7 +42,7 @@ public class AddTaskServlet extends HttpServlet {
                 .user(userManager.getById(userId))
                 .build();
         for (Part part : req.getParts()) {
-            if (getFileName(part) != null) {
+            if (getFileName(part) != null && !(getFileName(part).equals(""))) {
                 String fileName = System.currentTimeMillis() + getFileName(part);
                 String fullFileName = UPLOAD_DIR + File.separator + fileName;
                 part.write(fullFileName);

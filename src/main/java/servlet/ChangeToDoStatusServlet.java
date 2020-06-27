@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/changeTaskStatus")
 
-public class ChangeTaskStatusServlet extends HttpServlet {
+public class ChangeToDoStatusServlet extends HttpServlet {
     ToDoManager toDoManager = new ToDoManager();
 
 

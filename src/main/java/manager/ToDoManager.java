@@ -105,7 +105,7 @@ public class ToDoManager {
     }
 
     public ToDo getToDoById(long toDoId) {
-        ToDo toDo = null ;
+        ToDo toDo = null;
         Statement statement = null;
         try {
             statement = connection.createStatement();
@@ -117,6 +117,18 @@ public class ToDoManager {
             e.printStackTrace();
         }
         return toDo;
+    }
+
+    public boolean deleteToDo(Long toDoId) {
+        String sql = "DELETE FROM todo WHERE id = " + toDoId;
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public List<ToDo> getAllToDosByUser(long userId) {

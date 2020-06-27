@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/changeTaskStatus", "/changeTaskImage", "/changeTaskImage", "/addComments","/image","/commentHome"})
+@WebFilter(urlPatterns = { "/changeTaskImage", "/addComments","/image","/commentHome","/removeComment"})
 public class ManagerAndUserAuthFilter implements Filter {
 
     @Override

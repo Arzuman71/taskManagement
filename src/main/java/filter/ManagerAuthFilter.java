@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/manager", "/register", "/task", "/removeUser", "/removeToDo", "/removeToDo"})
+@WebFilter(urlPatterns = {"/manager", "/register", "/task", "/removeUser",  "/removeToDo"})
 public class ManagerAuthFilter implements Filter {
 
     @Override

@@ -1,6 +1,8 @@
 package servlet;
 
 import manager.ToDoManager;
+import model.User;
+import model.UserType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,16 +27,21 @@ public class ChangeToDoImageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int toDoId = Integer.parseInt(req.getParameter("toDoId"));
+        User user = (User) req.getSession().getAttribute("user");
         for (Part part : req.getParts()) {
             if (getFileName(part) != null) {
                 String fileName = System.currentTimeMillis() + getFileName(part);
                 String fullFileName = UPLOAD_DIR + File.separator + fileName;
                 part.write(fullFileName);
-                toDoManager.updateImage(toDoId,fileName);
+                toDoManager.updateImage(toDoId, fileName);
             }
         }
+        if (user.getUserType() == UserType.MANAGER) {
+            req.getRequestDispatcher("/manager").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/user").forward(req, resp);
+        }
 
-        req.getRequestDispatcher("/manager").forward(req, resp);
 
     }
 

@@ -31,6 +31,6 @@ public class AddCommentServlet extends HttpServlet {
                 .commentText(commentText)
                 .build();
         commentManager.addComment(comment);
-        req.getRequestDispatcher("/commentHome").forward(req, resp);
+        resp.sendRedirect("/commentHome?toDoId="+toDoId);
     }
 }

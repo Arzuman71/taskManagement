@@ -17,8 +17,9 @@ public class RemoveCommentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long commentId = Long.parseLong(req.getParameter("commentId"));
+        long toDoId = Long.parseLong(req.getParameter("toDoId"));
         commentManager.deleteComment(commentId);
-        req.getRequestDispatcher("/commentHome").forward(req,resp);
+        resp.sendRedirect("/commentHome?toDoId="+toDoId);
 
     }
 

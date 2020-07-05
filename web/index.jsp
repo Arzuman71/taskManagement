@@ -24,6 +24,27 @@
     </form>
 </div>
 </div>
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+        <img src="/image/ok2.png" style="width:100%; height: 500px">
+
+    </div>
+
+    <div class="mySlides fade">
+        <img src="/image/woman.jpg" style="width:100%; height: 500px">
+    </div>
+
+    <div class="mySlides fade">
+        <img src="/image/img2.jpg" style="width:100%; height: 500px">
+    </div>
+
+</div>
+<br>
+<script src="/js/jquery.js" type="text/javascript"></script>
+<script src="/js/slider.js" type="text/javascript"></script>
 
 
 </body>

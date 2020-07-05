@@ -11,6 +11,7 @@
 <h1>Sign In Form</h1>
 <div id="wrapper">
     <form id="signin" method="post" action="/login" autocomplete="off">
+
         <input type="text" id="user" name="email" placeholder="email"/>
         <input type="password" id="pass" name="password" placeholder="password"/>
         <button type="submit">&#10145;</button>
@@ -23,8 +24,7 @@
     </form>
 </div>
 </div>
-</body>
-</html>
+
 
 </body>
 </html>

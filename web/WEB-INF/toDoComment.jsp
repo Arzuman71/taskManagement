@@ -17,6 +17,7 @@
     User user = (User) session.getAttribute("user");
 
     ToDo toDo = (ToDo) request.getAttribute("ToDoById");
+
     List<Comment> comments = (List<Comment>) request.getAttribute("commentsByToDoId");
     if (user.getUserType() == UserType.MANAGER) {
 %>

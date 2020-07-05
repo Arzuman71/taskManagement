@@ -11,7 +11,6 @@
 <body class="body_2">
 <a class="logout" href="/logout">logout</a>
 <%
-    List<ToDo> toDoList = (List<ToDo>) request.getAttribute("toDoList");
     User user = (User) session.getAttribute("user");
     List<User> users = (List<User>) request.getAttribute("allUsers");
 
@@ -80,76 +79,48 @@
         </form>
     </div>
 </div>
-<% int count = 0;
-    for (ToDo toDo : toDoList) {
-        count++;
-%>
-<%if (count % 2 == 0) {%>
-<div class="left_todo2">
-    <ul><a class="todo_name" href="/commentHome?toDoId=<%=toDo.getId()%>"><%=toDo.getName()%>
-    </a>
-        <div class="changeTaskImage_block">
-            <li><% if (toDo.getPictureUrl() != null) { %>
-                <img class="todo_photo" src="/image?path=<%=toDo.getPictureUrl()%>"/> <%}else {%>
-                <img class="todo_photo" src="/image/na.jpg"/>
-                    <%}%>
 
-                <div class="changeTaskImage">
-                    <form action="/changeTaskImage" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="toDoId" value="<%=toDo.getId()%>">
-                        <input name="pictureUrl" type="file"/><br>
-                        <input type="submit" value="change photo"/>
-                    </form>
-                    <a class="delete" href="/removeToDo?todoId=<%= toDo.getId() %>">delete</a>
-
-                </div>
-        </div>
-        </li>
-
-        <li><%=DateUtil.convertDateToString(toDo.getCreatedDate())%>
-            --<%=DateUtil.convertDateToString(toDo.getDeadline())%>
-        </li>
-        <li class="changeTaskStatus_getStatus"><%=toDo.getStatus()%>
-        </li>
-        <li><%=toDo.getDescription()%>
-        </li>
-    </ul>
+<div id="todolist">
+    Loading...
 </div>
-<%
-} else {%>
-<div class="right_todo2">
-    <ul><a class="todo_name" href="/commentHome?toDoId=<%=toDo.getId()%>"><%=toDo.getName()%>
-    </a>
-        <div class="changeTaskImage_block">
-            <li><% if (toDo.getPictureUrl() != null) { %>
-                <img class="todo_photo" src="/image?path=<%=toDo.getPictureUrl()%>"/> <%} else {%>
-                <img class="todo_photo" src="/image/na.jpg"/>
-                    <%}%>
+<script src="/js/jquery.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
 
-                <div class="changeTaskImage">
-                    <form action="/changeTaskImage" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="toDoId" value="<%=toDo.getId()%>">
-                        <input name="pictureUrl" type="file"/><br>
-                        <input type="submit" value="change photo"/>
-                    </form>
-                    <a class="delete" href="/removeToDo?todoId=<%= toDo.getId() %>">delete</a>
+        $("#addTodo").submit(function (e) {
+            e.preventDefault();
+            let title = $("#title").val();
+            let deadline = $("#deadline").val();
+            $.ajax({
+                url: "/addTodo?title=" + title + "&deadline=" + deadline,
+                method: "POST",
+                success: function (result) {
+                    $("#info").html(result);
+                    $("#title").val("");
+                    $("#deadline").val("")
+                },
+                error: function () {
+                    $("#info").html("there is problem with todo data.!");
+                }
 
-                </div>
-        </div>
-        </li>
+            });
 
-        <li><%=DateUtil.convertDateToString(toDo.getCreatedDate())%>
-            --<%=DateUtil.convertDateToString(toDo.getDeadline())%>
-        </li>
-        <li class="changeTaskStatus_getStatus"><%=toDo.getStatus()%>
-        </li>
-        <li><%=toDo.getDescription()%>
-        </li>
-    </ul>
-</div>
+        })
 
-<% }
-}
-%>
+        let getTodoList = function () {
+            $.ajax({
+                url: "/allTodoList",
+                method: "GET",
+                success: function (result) {
+                    $("#todolist").html(result);
+                }
+
+            });
+        };
+        getTodoList();
+        setInterval(getTodoList, 2000)
+
+    })
+</script>
 </body>
 </html>

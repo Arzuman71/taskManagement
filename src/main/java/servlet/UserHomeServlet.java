@@ -21,8 +21,6 @@ public class UserHomeServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
-        List<ToDo> toDoList = toDoManager.getAllToDosByUser(user.getId());
-        req.setAttribute("toDoList", toDoList);
 
 
         req.getRequestDispatcher("/WEB-INF/userHome.jsp").forward(req, resp);

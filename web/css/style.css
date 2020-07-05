@@ -193,25 +193,24 @@ ul li {
 
 .left_todo {
     margin-left: 750px;
-    margin-top: -370px;
 
 }
 
 .right_todo {
     margin-left: 50px;
     width: 50%;
+    position: absolute;
 
 }
 
 .left_todo2 {
     margin-left: 750px;
-    margin-top: -320px;
 }
 
 .right_todo2 {
     margin-left: 50px;
-    height: 300px;
     width: 50%;
+    position: absolute;
 }
 
 .delete {
@@ -247,13 +246,11 @@ ul li {
 
 
 .control {
-    border: 2px red dotted;
     height: 600px;
 }
 
 .control2 {
     width: 700px;
-    border: #ce1515 1px inset;
     margin: auto;
     position: absolute;
     top: 0;

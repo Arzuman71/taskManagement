@@ -22,8 +22,6 @@ public class ManagerHomeServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<ToDo> toDoList = toDoManager.getAll();
-        req.setAttribute("toDoList", toDoList);
         req.setAttribute("allUsers", userManager.getAllUsers());
         req.getRequestDispatcher("WEB-INF/managerHome.jsp").forward(req, resp);
 

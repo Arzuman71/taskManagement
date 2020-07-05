@@ -30,92 +30,48 @@
     <%}%>
 </div>
 
-<% int count = 0;
-    for (ToDo toDo : toDoList) {
-        count++;
-%>
-<%if (count % 2 == 0) {%>
-<div class="left_todo">
-<ul><a class="todo_name" href="/commentHome?toDoId=<%=toDo.getId()%>"><%=toDo.getName()%>
-</a>
-    <div class="changeTaskImage_block">
-        <li><% if (toDo.getPictureUrl() != null) { %>
-            <img class="todo_photo" src="/image?path=<%=toDo.getPictureUrl()%>"/> <%}else {%>
-            <img class="todo_photo" src="/image/na.jpg"/>
-                <%}%>
 
-            <div class="changeTaskImage">
-                <form action="/changeTaskImage" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="toDoId" value="<%=toDo.getId()%>">
-                    <input name="pictureUrl" type="file"/><br>
-                    <input type="submit" value="change photo"/>
-                </form>
-            </div>
-    </div>
-    </li>
-
-    <li><%=DateUtil.convertDateToString(toDo.getCreatedDate())%>
-        --<%=DateUtil.convertDateToString(toDo.getDeadline())%>
-    </li>
-    <li class="changeTaskStatus_getStatus"><%=toDo.getStatus()%>
-        <div class="changeTaskStatus">
-            <form action="/changeTaskStatus" method="get">
-                <input type="hidden" name="toDoId" value="<%=toDo.getId()%>">
-                <select name="status">
-                    <option value="TODO">TODO</option>
-                    <option value="FINISHED">FINISHED</option>
-                    <option value="IN_PROGRESS">IN_PROGRESS</option>
-                </select> <input type="submit" value="Update">
-            </form>
-        </div>
-    </li>
-    <li><%=toDo.getDescription()%>
-    </li>
-</ul>
+<div id="todolist">
+    Loading...
 </div>
-<%
-} else {%>
-<div class="right_todo">
-    <ul><a class="todo_name" href="/commentHome?toDoId=<%=toDo.getId()%>"><%=toDo.getName()%>
-    </a>
-        <div class="changeTaskImage_block">
-            <li><% if (toDo.getPictureUrl() != null) { %>
-                <img class="todo_photo" src="/image?path=<%=toDo.getPictureUrl()%>"/> <%}else {%>
-                <img class="todo_photo" src="/image/na.jpg"/>
-                    <%}%>
+<script src="/js/jquery.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
 
-                <div class="changeTaskImage">
-                    <form action="/changeTaskImage" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="toDoId" value="<%=toDo.getId()%>">
-                        <input name="pictureUrl" type="file"/><br>
-                        <input type="submit" value="change photo"/>
-                    </form>
-                </div>
-        </div>
-        </li>
+        $("#addTodo").submit(function (e) {
+            e.preventDefault();
+            let title = $("#title").val();
+            let deadline = $("#deadline").val();
+            $.ajax({
+                url: "/addTodo?title=" + title + "&deadline=" + deadline,
+                method: "POST",
+                success: function (result) {
+                    $("#info").html(result);
+                    $("#title").val("");
+                    $("#deadline").val("")
+                },
+                error: function () {
+                    $("#info").html("there is problem with todo data.!");
+                }
 
-        <li><%=DateUtil.convertDateToString(toDo.getCreatedDate())%>
-            --<%=DateUtil.convertDateToString(toDo.getDeadline())%>
-        </li>
-        <li class="changeTaskStatus_getStatus"><%=toDo.getStatus()%>
-            <div class="changeTaskStatus">
-                <form action="/changeTaskStatus" method="get">
-                    <input type="hidden" name="toDoId" value="<%=toDo.getId()%>">
-                    <select name="status">
-                        <option value="TODO">TODO</option>
-                        <option value="FINISHED">FINISHED</option>
-                        <option value="IN_PROGRESS">IN_PROGRESS</option>
-                    </select> <input type="submit" value="Update">
-                </form>
-            </div>
-        </li>
-        <li><%=toDo.getDescription()%>
-        </li>
-    </ul>
-</div>
+            });
 
-<% }
-}
-%>
+        })
+
+        let getTodoList = function () {
+            $.ajax({
+                url: "/allTodoList",
+                method: "GET",
+                success: function (result) {
+                    $("#todolist").html(result);
+                }
+
+            });
+        };
+        getTodoList();
+        setInterval(getTodoList, 2000)
+
+    })
+</script>
 </body>
 </html>
